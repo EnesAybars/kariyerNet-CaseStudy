@@ -1,8 +1,11 @@
 package net.kariyer.pages;
 
 import net.kariyer.utilities.ConfigurationReader;
+import net.kariyer.utilities.Driver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LoginPage extends BasePage {
 
@@ -21,6 +24,8 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//a[@id='forgottenPassLink']")
     public WebElement forgottonPassLink;
 
+    @FindBy(xpath = "//body/div[3]/div[1]/div[1]/div[1]")
+    public WebElement captchaHeader;
 
     /*
     @FindBy(xpath = "//h3[@class='login-title']")
@@ -40,6 +45,13 @@ public class LoginPage extends BasePage {
         adayGirisiButton.click();
     }
 
-
+    public void waitForCaptcha(){
+        try {
+            WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 5);
+            wait.until(ExpectedConditions.titleIs(ConfigurationReader.get("accountPageTitle")));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 }

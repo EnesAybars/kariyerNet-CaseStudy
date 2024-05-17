@@ -50,12 +50,14 @@ public class LoginStepDefinitions {
     @When("user clicks login button")
     public void user_clicks_login_button() {
         loginPage.girisYapButton.click();
-        BrowserUtils.wait(5);
+        BrowserUtils.wait(3);
+        loginPage.waitForCaptcha();
         /*
         Puzzle captcha works in this step which fails the test, so that I skipped this part manually.
-        In order to slide and pass the captcha manually we need time, Therefore I wait with Java logic
-        which is not recommended for real work environment.
+        In order to pass this step, we have to slide the captcha manually, so that we need time.
+        Therefore, I wait with Java logic which is not recommended for real work environment.
         */
+
     }
 
     @Then("user should be on the account page")
@@ -64,22 +66,30 @@ public class LoginStepDefinitions {
         /**
          * Solution 1
          * */
-        // accountPage.accountPageVerification();
+        //accountPage.accountPageVerification();
+
         /* In this step Scenario works as it must be. User can land the accountPage. However, we get
         NullPointerException in this solution because of the guideFrame. There is something wrong with
         finding the web element which seems in the DOM but when we locate it, it doesn't response as WebElement.
         Therefore, it throws NullPointerException.
         */
+        /**
+        * IMPORTANT NOTE!!!
+        * I realized that I forgot to add implicitlyWait into my driver. Due to synchronization issue, my code
+        * throws NullPointerException when we try to run accountPageVerification method. After I add implicitly
+        * wait into my driver class, and wait with explicitly with the methods created, we can see
+        * that the Scenario is passing from test execution and working properly. WebDriver remains synchronized
+        * with the actual page.
+        *
+        */
+
 
 
         /**
          * Solution 2
          * */
-        //BrowserUtils.waitForVisibility(accountPage.pageBody, 5);
-        BrowserUtils.wait(2);
-        String actualAccPageUrl = Driver.getDriver().getCurrentUrl();
-        String expectedAccPageUrl = ConfigurationReader.get("accountPageUrl");
-        Assert.assertEquals(expectedAccPageUrl, actualAccPageUrl);
+
+         accountPage.accountPageAssertion(Driver.getDriver().getTitle());
     }
 
 }

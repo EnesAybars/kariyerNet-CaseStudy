@@ -25,7 +25,7 @@ public class ForgotMyPassStepDef {
         //String expectedPageText = ConfigurationReader.get("loginTitle");
         String expectedPageText = "Aday Üye Girişi";
         /* Since the charset doesn't support "ş" letter, I embedded the loginTitle as static in the above statement.
-        See in the configuration.properties when you hover over the letter: "Unsupported characters for the charset
+        See in the configuration.properties when you hover-over the letter: "Unsupported characters for the charset
         'ISO-8859-1'" */
         Assert.assertEquals(expectedPageText, actualPageText);
     }
@@ -40,7 +40,7 @@ public class ForgotMyPassStepDef {
         forgotMyPassPage.sifremiUnuttumTitle.isDisplayed();
         String actualPageText = forgotMyPassPage.sifremiUnuttumTitle.getText();
         //String expectedPageText = ConfigurationReader.get("forgotMyPassPageTitle");
-        String expectedPageText = "Şifremi Unuttum"; //Static code bcz of: Ş letter
+        String expectedPageText = "Şifremi Unuttum"; //Static code bcz of: "Ş" letter
         Assert.assertEquals(expectedPageText, actualPageText);
     }
 
@@ -65,7 +65,7 @@ public class ForgotMyPassStepDef {
     public void user_should_see_reset_link_sent_page() {
         Assert.assertTrue(forgotMyPassPage.sifreSifirBagGonderdikText.isDisplayed());
         String actualTitle = forgotMyPassPage.sifreSifirBagGonderdikText.getText();
-        String expectedTitle = "Şifre sıfırlama bağlantısını gönderdik";  //Static code bcz of: Ş letter
+        String expectedTitle = "Şifre sıfırlama bağlantısını gönderdik";  //Static code bcz of: "Ş" letter
         Assert.assertEquals(expectedTitle, actualTitle);
     }
 

@@ -1,5 +1,4 @@
 package net.kariyer.runners;
-
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
@@ -17,12 +16,7 @@ import org.junit.runner.RunWith;
         dryRun = false,
         tags = "@wip",  //work in progress
         publish = true
-
-
 )
-
-
-
 public class CukesRunner {
 
 }
